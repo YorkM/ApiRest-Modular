@@ -4,7 +4,6 @@
 // llamar capa de servicio
 // enviar respuestas al cliente
 
-
 export class ControladorHabitacion{
 
     constructor(){
@@ -60,15 +59,69 @@ export class ControladorHabitacion{
     }
 
     registrar(request, response){
+        let datosPeticion=request.body
+        try{
 
+            response.status(200).json({
+                mensaje:"Exito agregando la habitacion",
+                data:datosPeticion,
+                estado:true
+            })
+
+        }catch(error){
+
+            response.status(400).json({
+                mensaje:"Fallamos agregando la habitacion",
+                data:[],
+                estado:false
+            })
+
+        }
     }
 
     editar(request, response){
+        let id=request.params.id
+        let datosPeticion=request.body
+        try{
 
+            response.status(200).json({
+                mensaje:"Exito editando la habitacion",
+                data:datosPeticion,
+                estado:true
+            })
+
+
+        }catch(error){
+
+            response.status(400).json({
+                mensaje:"fallamos editando la habitacion "+error,
+                data:[],
+                estado:false
+            })
+
+        }
     }
 
     eliminar(request, response){
+        let id=request.params.id
+        try{
 
+            response.status(200).json({
+                mensaje:"Exito eliminando la habitacion",
+                data:[],
+                estado:true
+            })
+
+
+        }catch(error){
+
+            response.status(400).json({
+                mensaje:"fallamos eliminando la habitacion "+error,
+                data:[],
+                estado:false
+            })
+
+        }
     }
 
 }

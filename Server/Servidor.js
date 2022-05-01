@@ -5,7 +5,8 @@ import { rutas } from '../routes/rutas.js'
 
 export class Servidor{
     constructor(){
-        this.app = express()
+        this.app = express()  //ATRIBUTO APP guarda a express
+        this.llamarAuxiliares()  //activo midlewares o ayudas
         this.atenderPeticiones()
     }
 
@@ -18,5 +19,9 @@ export class Servidor{
     atenderPeticiones(){
         // llamando al archivo de rutas
         this.app.use('/', rutas)
+    }
+
+    llamarAuxiliares(){
+        this.app.use(express.json()) //ayudante para recibir datos por el body de la peticion
     }
 }
