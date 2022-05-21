@@ -3,28 +3,32 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema; // Esquema de datos(que datos tiene mi modelo) 
 
 // Creo mi propio esquema de datos
-const Habitacion = new Schema({
-    nombre:{
+const Reservas = new Schema({
+    idCliente:{
         type: String,
         required: true
     },
-    precio:{
+    tarjetaCredito:{
+        type: String,
+        required: true
+    },
+    fechaIngreso:{
+        type: Date,
+        required: true
+    },
+    fechaSalida:{
+        type: Date,
+        required: true
+    },
+    idHabitacion:{
+        type: String,
+        required: true
+    },
+    costo:{
         type: Number,
         required: true
-    },
-    capacidad:{
-        type: Number,
-        required: true
-    },
-    descripcion:{
-        type: String,
-        required: true
-    },
-    imagen:{
-        type: String,
-        required: true
-    }
+    } 
 })
 
 // Se envia el modelo de datos
-export const modeloHabitacion = mongoose.model('habitaciones', Habitacion);
+export const modeloReservas = mongoose.model('reservas', Reservas);
