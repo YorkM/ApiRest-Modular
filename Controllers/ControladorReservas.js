@@ -4,17 +4,16 @@
 // llamar capa de servicio
 // enviar respuestas al cliente
 
-export class ControladorReservas{
+import { ServicioReservas } from "../services/ServicioReservas.js"
+
+export class ControladorReserva{
 
     constructor(){
         
     }
-   
-    buscarPorId(request, response){
-        let  datos =
-        [
-            {nombreCliente: "York", fechaEntrada: "07/05/2022", fechaSalida: "10/05/2022", numeroPersonas: 3}
-        ]
+
+    async buscarPorId(request, response){
+        let servicioReserva = new ServicioReservas()
 
         let id = request.params.id
         console.log(id)
@@ -23,7 +22,7 @@ export class ControladorReservas{
             // todo sale bien
             response.status(200).json({
                 mensaje: "Exito buscando datos " + id,
-                data: datos,
+                data: await servicioReserva.buscarPorId(id),
                 estado: true
             })
         }catch(error){
@@ -35,20 +34,22 @@ export class ControladorReservas{
         }
     }
 
-    registrar(request, response){
+    async registrar(request, response){
+        let servicioReserva = new ServicioReservas()
+
         let datosPeticion=request.body
         try{
-
+            await servicioReserva.registrar(datosPeticion)
             response.status(200).json({
-                mensaje:"Reserva registrada exitosamente",
-                data:datosPeticion,
+                mensaje:"Exito agregando la resreva",
+                data: null,
                 estado:true
             })
 
         }catch(error){
 
             response.status(400).json({
-                mensaje:"No se puede registrar la reserva",
+                mensaje:"Fallamos agregando la reserva",
                 data:[],
                 estado:false
             })
@@ -56,14 +57,16 @@ export class ControladorReservas{
         }
     }
 
-    editar(request, response){
+    async editar(request, response){
+        let servicioReserva = new ServicioReservas()
+
         let id=request.params.id
         let datosPeticion=request.body
         try{
-
+            await servicioReserva.editar(id, datosPeticion)
             response.status(200).json({
                 mensaje:"Exito editando la reserva",
-                data:datosPeticion,
+                data: null,
                 estado:true
             })
 
@@ -79,13 +82,15 @@ export class ControladorReservas{
         }
     }
 
-    eliminar(request, response){
+    async eliminar(request, response){
+        let servicioReserva = new ServicioReservas()
+
         let id=request.params.id
         try{
-
+            await servicioReserva.eliminar(id)
             response.status(200).json({
                 mensaje:"Exito eliminando la reserva",
-                data:[],
+                data: null,
                 estado:true
             })
 
@@ -93,7 +98,7 @@ export class ControladorReservas{
         }catch(error){
 
             response.status(400).json({
-                mensaje:"fallamos eliminando la reserva"+error,
+                mensaje:"fallamos eliminando la reserva "+error,
                 data:[],
                 estado:false
             })
