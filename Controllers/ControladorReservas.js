@@ -4,9 +4,8 @@
 // llamar capa de servicio
 // enviar respuestas al cliente
 
-import { ServicioReservas } from "../services/ServicioReservas.js"
-
-export class ControladorReserva{
+import { ServicioReservas } from '../services/ServicioReservas.js'
+export class ControladorReservas{
 
     constructor(){
         

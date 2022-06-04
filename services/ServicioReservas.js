@@ -1,29 +1,28 @@
 // Importamos el modelo de habitacion
-import {modeloReservas} from '../Models/modeloReservas.js'
-
+import { modeloReserva } from "../Models/modeloReserva.js"
  export class ServicioReservas{
     constructor(){}
     
     async registrar(reservas){
-        let reservaARegistrar = new modeloReservas(reservas)
+        let reservaARegistrar = new modeloReserva(reservas)
         return await reservaARegistrar.save()
     }
 
     async buscarTodas(){
-        let reservas = await modeloReservas.find()
+        let reservas = await modeloReserva.find()
         return (reservas)
     }
 
     async buscarPorId(id){
-        let habitacion = await modeloReservas.findById(id)
+        let habitacion = await modeloReserva.findById(id)
         return (habitacion)
     }
 
     async editar(id, datos){
-        return await modeloReservas.findByIdAndUpdate(id, datos)
+        return await modeloReserva.findByIdAndUpdate(id, datos)
     }
 
     async eliminar(id){
-        return await modeloReservas.findByIdAndRemove(id)
+        return await modeloReserva.findByIdAndRemove(id)
     }
 }
